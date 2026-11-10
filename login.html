@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>로그인 - 캠퍼스 분실물 찾기</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif; }
+    body { background: #E7E2D7; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #111; padding: 20px 0; }
+    .iphone-17-pro { width: 402px; height: 874px; background: #F7F3E9; border-radius: 54px; box-shadow: 0 0 0 8px #1F1F1F, 0 0 0 10px #343434, 0 12px 28px rgba(0,0,0,0.12); position: relative; display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+
+    .status-bar { height: 54px; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; position: relative; z-index: 20; }
+    .status-time { font-size: 14.5px; font-weight: 700; width: 70px; }
+    .dynamic-island { position: absolute; left: 50%; top: 11px; transform: translateX(-50%); width: 125px; height: 35px; background: #000; border-radius: 20px; }
+    .status-icons { display: flex; align-items: center; gap: 6px; width: 75px; justify-content: flex-end; }
+
+    .app-header { height: 48px; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .header-title { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
+
+    .login-container { flex: 1; padding: 30px 24px; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
+
+    .brand-section { text-align: center; margin-top: 10px; margin-bottom: 20px; }
+    .brand-logo {
+      width: 72px;
+      height: 72px;
+      background: #E2682C;
+      border: 2px solid #141414;
+      border-radius: 20px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 0 #141414;
+    }
+    .brand-title { font-size: 24px; font-weight: 800; color: #111; letter-spacing: -0.5px; margin-bottom: 6px; }
+    .brand-desc { font-size: 13px; font-weight: 600; color: #666; }
+
+    .login-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-size: 13px; font-weight: 800; color: #222; }
+
+    .form-input, .form-select {
+      width: 100%;
+      height: 46px;
+      background: #FFF;
+      border: 1.5px solid #141414;
+      border-radius: 12px;
+      padding: 0 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      outline: none;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      transition: border-color 0.15s;
+    }
+    .form-input:focus, .form-select:focus { border-color: #E2682C; }
+    .form-input.invalid, .form-select.invalid { border-color: #DC2626; background: #FEF2F2; }
+
+    .error-msg { font-size: 11.5px; font-weight: 700; color: #DC2626; display: none; margin-top: 2px; }
+
+    .submit-btn {
+      width: 100%;
+      height: 48px;
+      background: #E2682C;
+      color: #FFF;
+      border: 1.5px solid #141414;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+      margin-top: 10px;
+      transition: transform 0.1s, opacity 0.15s;
+    }
+    .submit-btn:active { transform: translateY(1px); opacity: 0.9; }
+
+    .sub-links { display: flex; justify-content: center; gap: 16px; margin-top: 16px; font-size: 12.5px; font-weight: 700; color: #666; }
+    .sub-links a { color: inherit; text-decoration: none; }
+    .sub-links a:hover { color: #E2682C; }
+    .divider { color: #CCC; }
+  </style>
+</head>
+<body>
+  <div class="iphone-17-pro">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="dynamic-island"></div>
+      <div class="status-icons">
+        <svg width="15" height="11" viewBox="0 0 17 12"><path d="M1 9.5h2v2.5H1zm4-3h2v5.5H5zm4-3h2v8.5H9zm4-3.5h2v12h-2z" fill="#111"/></svg>
+        <svg width="20" height="10" viewBox="0 0 22 11"><rect x="0.5" y="0.5" width="19" height="10" rx="2.5" fill="none" stroke="#111" stroke-width="1.2"/><rect x="2" y="2" width="14" height="7" rx="1.5" fill="#111"/><path d="M20.5 4v3" stroke="#111" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <div class="app-header">
+      <div class="header-title">로그인</div>
+    </div>
+
+    <div class="login-container">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+        <div class="brand-title">캠퍼스 분실물 찾기</div>
+        <div class="brand-desc">우리 학교 학생들과 안전하게 소지품을 찾으세요</div>
+      </div>
+
+      <form id="loginForm" class="login-form" novalidate>
+        <div class="form-group">
+          <label class="form-label">소속 학교</label>
+          <select id="schoolSelect" class="form-select">
+            <option value="">학교를 선택하세요</option>
+            <option value="wonkwang" selected>원광대학교</option>
+            <option value="chonbuk">전북대학교</option>
+            <option value="chonnam">전남대학교</option>
+            <option value="chungnam">충남대학교</option>
+          </select>
+          <div id="schoolError" class="error-msg">소속 학교를 선택해 주세요.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">학번 또는 이메일</label>
+          <input type="text" id="usernameInput" class="form-input" placeholder="학번(8~9자리) 또는 이메일 입력">
+          <div id="usernameError" class="error-msg">학번(8~9자) 또는 올바른 이메일 형식을 입력해 주세요.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">비밀번호</label>
+          <input type="password" id="passwordInput" class="form-input" placeholder="비밀번호 입력 (8자 이상)">
+          <div id="passwordError" class="error-msg">비밀번호는 8자 이상이어야 합니다.</div>
+        </div>
+
+        <button type="submit" class="submit-btn">로그인</button>
+      </form>
+
+      <div class="sub-links">
+        <a href="#" onclick="alert('회원가입 페이지 연결 예정입니다.');">회원가입</a>
+        <span class="divider">|</span>
+        <a href="#" onclick="alert('비밀번호 찾기 기능 준비 중입니다.');">비밀번호 찾기</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      const schoolSelect = document.getElementById('schoolSelect');
+      const usernameInput = document.getElementById('usernameInput');
+      const passwordInput = document.getElementById('passwordInput');
+
+      const schoolError = document.getElementById('schoolError');
+      const usernameError = document.getElementById('usernameError');
+      const passwordError = document.getElementById('passwordError');
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isValid = true;
+
+        if (!schoolSelect.value) {
+          schoolSelect.classList.add('invalid');
+          schoolError.style.display = 'block';
+          isValid = false;
+        } else {
+          schoolSelect.classList.remove('invalid');
+          schoolError.style.display = 'none';
+        }
+
+        const usernameVal = usernameInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const studentIdRegex = /^\d{8,9}$/;
+
+        if (!usernameVal || (!emailRegex.test(usernameVal) && !studentIdRegex.test(usernameVal))) {
+          usernameInput.classList.add('invalid');
+          usernameError.style.display = 'block';
+          isValid = false;
+        } else {
+          usernameInput.classList.remove('invalid');
+          usernameError.style.display = 'none';
+        }
+
+        const passwordVal = passwordInput.value;
+        if (!passwordVal || passwordVal.length < 8) {
+          passwordInput.classList.add('invalid');
+          passwordError.style.display = 'block';
+          isValid = false;
+        } else {
+          passwordInput.classList.remove('invalid');
+          passwordError.style.display = 'none';
+        }
+
+        if (isValid) {
+          alert('로그인 성공! 분실물 목록 화면으로 이동합니다.');
+          location.href = 'list_7_v4.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

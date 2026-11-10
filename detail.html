@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>상세보기 - 캠퍼스 분실물 찾기</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif; }
+    body { background: #E7E2D7; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #111; padding: 20px 0; }
+    .iphone-17-pro { width: 402px; height: 874px; background: #F7F3E9; border-radius: 54px; box-shadow: 0 0 0 8px #1F1F1F, 0 0 0 10px #343434, 0 12px 28px rgba(0,0,0,0.12); position: relative; display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+
+    .status-bar { height: 54px; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; position: relative; z-index: 20; }
+    .status-time { font-size: 14.5px; font-weight: 700; width: 70px; }
+    .dynamic-island { position: absolute; left: 50%; top: 11px; transform: translateX(-50%); width: 125px; height: 35px; background: #000; border-radius: 20px; }
+    .status-icons { display: flex; align-items: center; gap: 6px; width: 75px; justify-content: flex-end; }
+
+    .app-header { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .back-btn { background: none; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; }
+    .header-title { font-size: 17px; font-weight: 800; letter-spacing: -0.3px; }
+    .placeholder-right { width: 32px; }
+
+    .detail-container { flex: 1; overflow-y: auto; padding-bottom: 95px; }
+
+    .img-gallery { width: 100%; height: 260px; background: #EAE5D9; display: flex; align-items: center; justify-content: center; border-bottom: 1.5px solid #141414; }
+    .img-gallery svg { width: 160px; height: 160px; }
+
+    .content-section { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+
+    .badge-row { display: flex; align-items: center; gap: 8px; }
+    .inline-badge { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; color: #FFF; }
+    .badge-f { background: #E2682C; }
+
+    .detail-title { font-size: 20px; font-weight: 800; color: #111; letter-spacing: -0.4px; }
+
+    .info-card { background: #FFF; border: 1.5px solid #141414; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+    .info-row { display: flex; justify-content: space-between; font-size: 13.5px; }
+    .info-label { font-weight: 700; color: #777; }
+    .info-value { font-weight: 800; color: #111; }
+
+    .desc-box { background: #FFF; border: 1.5px solid #141414; border-radius: 16px; padding: 16px; font-size: 14px; line-height: 1.6; font-weight: 600; color: #333; }
+
+    .bottom-action-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 84px; background: #F8F5EE; border-top: 1.5px solid #1A1A1A; display: flex; align-items: center; padding: 0 20px; gap: 12px; z-index: 30; }
+    .chat-btn { flex: 1; height: 48px; background: #E2682C; color: #FFF; border: 1.5px solid #141414; border-radius: 14px; font-size: 15.5px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .chat-btn:active { transform: translateY(1px); }
+  </style>
+</head>
+<body>
+  <div class="iphone-17-pro">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="dynamic-island"></div>
+      <div class="status-icons">
+        <svg width="15" height="11" viewBox="0 0 17 12"><path d="M1 9.5h2v2.5H1zm4-3h2v5.5H5zm4-3h2v8.5H9zm4-3.5h2v12h-2z" fill="#111"/></svg>
+        <svg width="20" height="10" viewBox="0 0 22 11"><rect x="0.5" y="0.5" width="19" height="10" rx="2.5" fill="none" stroke="#111" stroke-width="1.2"/><rect x="2" y="2" width="14" height="7" rx="1.5" fill="#111"/><path d="M20.5 4v3" stroke="#111" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <div class="app-header">
+      <button class="back-btn" onclick="history.back();">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="header-title">상세 정보</div>
+      <div class="placeholder-right"></div>
+    </div>
+
+    <div class="detail-container">
+      <div class="img-gallery">
+        <svg viewBox="0 0 80 80" fill="none">
+          <rect width="80" height="80" rx="12" fill="#EAE5D9"/>
+          <rect x="22" y="24" width="36" height="32" rx="12" fill="#FFF" stroke="#1A1A1A" stroke-width="2.2"/>
+          <line x1="22" y1="36" x2="58" y2="36" stroke="#1A1A1A" stroke-width="1.8"/>
+          <circle cx="40" cy="45" r="2.5" fill="#1A1A1A"/>
+          <path d="M16 16C16 13.79 17.79 12 20 12C22.21 12 24 13.79 24 16V22H16V16Z" fill="#FFF" stroke="#1A1A1A" stroke-width="2"/>
+          <path d="M22 22V30" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="content-section">
+        <div class="badge-row">
+          <span class="inline-badge badge-f">보관중</span>
+        </div>
+
+        <div class="detail-title">에어팟 프로 2세대</div>
+
+        <div class="info-card">
+          <div class="info-row">
+            <span class="info-label">습득 장소</span>
+            <span class="info-value">중앙도서관 5층 열람실 3번 테이블</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">습득 시간</span>
+            <span class="info-value">2026년 11월 10일 14:20</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">보관 장소</span>
+            <span class="info-value">중앙도서관 5층 주제정보과</span>
+          </div>
+        </div>
+
+        <div class="desc-box">
+          도서관 5층 열람실 좌석 정리 중 발견했습니다.<br>
+          투명 실리콘 케이스가 씌워져 있고, 케이스 고리에 작은 곰인형 키링이 달려 있습니다.<br>
+          본인 확인을 위해 에어팟 이름(블루투스 명칭) 또는 케이스 내부 시리얼 넘버 확인 후 찾아가시기 바랍니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-action-bar">
+      <button class="chat-btn" onclick="alert('습득자(도서관 주제정보과)와의 1:1 채팅 화면으로 연결됩니다.');">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>습득자와 1:1 문의하기</span>
+      </button>
+    </div>
+  </div>
+</body>
+</html>
